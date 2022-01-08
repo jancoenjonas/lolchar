@@ -1,31 +1,124 @@
 import * as React from "react"
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
-
 import Layout from "../components/layout"
-import Seo from "../components/seo"
+import { Link, graphql } from 'gatsby'
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import {
+  header,
+  headerInfo,
+  headerPicture,
+  headerTitle,
+  CTA,
+} from "../page.module.css"
 
-const IndexPage = () => (
-  <Layout>
-    <Seo title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <StaticImage
-      src="../images/gatsby-astronaut.png"
-      width={300}
-      quality={95}
-      formats={["auto", "webp", "avif"]}
-      alt="A Gatsby astronaut"
-      style={{ marginBottom: `1.45rem` }}
-    />
-    <p>
-      <Link to="/page-2/">Go to page 2</Link> <br />
-      <Link to="/using-typescript/">Go to "Using TypeScript"</Link> <br />
-      <Link to="/using-ssr">Go to "Using SSR"</Link> <br />
-      <Link to="/using-dsg">Go to "Using DSG"</Link>
-    </p>
-  </Layout>
-)
 
+// Imports
+
+const IndexPage = ({
+  data: {
+    wpPage: { homePage },
+  },
+}) => {
+  const image = getImage(homePage.headerHome.picture.localFile)
+
+  return (
+    <Layout>
+      <div className={header}>
+        <div className={headerInfo}>
+          <h1 className={headerTitle}>{homePage.headerHome.title}</h1>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: homePage.headerHome.description,
+            }}
+          />
+          <a className={CTA} target="__blank" href={homePage.callToAction.link}>
+            {homePage.callToAction.description}
+          </a>
+        </div>
+        <div>
+          <GatsbyImage
+            image={image}
+            className={headerPicture}
+            alt={homePage.headerHome.picture.altText}
+          />
+        </div>
+      </div>
+      <div>
+    <h2>{homePage.featuredCharacter.title}</h2>
+    <p>{homePage.featuredCharacter.description}</p>
+    <div>
+      {homePage.featuredCharacter.characters.map(characters => {
+        const profile = getImage(characters.characterMeta.profilePicture.localFile)
+
+        return (
+          <Link to={`Champion/${characters.slug}`}>
+            <GatsbyImage
+              image={profile}
+              alt={characters.characterMeta.profilePicture.altText}
+            />
+            <div>
+              {characters.characterMeta.naam && (
+                <p>{characters.characterMeta.naam}</p>
+              )}
+              <p>
+                {characters.characterMeta.naam} {characters.characterMeta.alias}
+              </p>
+            </div>
+          </Link>
+          )
+      })}
+    </div>
+  </div>
+</Layout>
+  )
+}
+
+// Page Query
+export const query = graphql`
+query  {
+  wpPage {
+    homePage {
+      headerHome {
+        description
+        title
+        picture {
+          altText
+          localFile {
+            childImageSharp {
+              gatsbyImageData(placeholder: BLURRED, width: 500, height: 500)
+            }
+          }
+        }
+      }
+      callToAction {
+        description
+        link
+      }
+      featuredCharacter {
+        characters {
+          ... on WpCharacters {
+            id
+            characterMeta {
+              naam
+              alias
+              orign
+              profilePicture {
+                altText
+                localFile {
+                  childImageSharp {
+                    gatsbyImageData(placeholder: BLURRED, transformOptions: {grayscale: true})
+                  }
+                }
+                slug
+              }
+            }
+          }
+        }
+        description
+        title
+      }
+    }
+  }
+}
+
+`
 export default IndexPage

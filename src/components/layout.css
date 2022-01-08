@@ -88,13 +88,7 @@ h1 {
   font-size: 2.25rem;
   line-height: 1.1;
 }
-mark {
-  background-color: #ff0;
-  color: #000;
-}
-small {
-  font-size: 80%;
-}
+
 sub,
 sup {
   font-size: 75%;

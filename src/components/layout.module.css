@@ -1,0 +1,50 @@
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  font: 112.5%/1.45em sans-serif, georgia, serif;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  background-color: whitesmoke;
+}
+ 
+body {
+  color: #7BB186;
+  font-style: bold;
+
+}
+
+.container {
+  width: 90%;
+  max-width: 1080px;
+  margin: auto;
+  font-family: sans-serif;
+}
+
+.nav {
+  display: flex;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  height: 90px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.nav-link-item {
+  margin-right: 1rem;
+}
+
+.nav-link-text {
+  color:#C79B3B;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bolder;
+ 
+}
+
+.nav-link-text:hover {
+  color: #00D5FF;
+}
