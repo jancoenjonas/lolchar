@@ -43,41 +43,28 @@ const IndexPage = ({
         </div>
       </div>
       <div>
-    <h2>{homePage.featuredCharacter.title}</h2>
-    <p>{homePage.featuredCharacter.description}</p>
-    <div>
-      {homePage.featuredCharacter.characters.map(characters => {
-        const profile = getImage(characters.characterMeta.profilePicture.localFile)
+        <h2>{homePage.featuredCharacter.title}</h2>
+        <div>
+          {homePage.featuredCharacter.characters.map(characters => {
+            const profileImage = getImage(characters.characterMeta.profilePicture.localFile)
 
-        return (
-          <Link to={`Champion/${characters.slug}`}>
-            <GatsbyImage
-              image={profile}
-              alt={characters.characterMeta.profilePicture.altText}
-            />
-            <div>
-              {characters.characterMeta.naam && (
-                <p>{characters.characterMeta.naam}</p>
-              )}
-              <p>
-                {characters.characterMeta.naam} {characters.characterMeta.alias}
-              </p>
-            </div>
-          </Link>
-          )
-      })}
-    </div>
-  </div>
-  <div>
-    <h2>{homePage.featuredCharacter.title}</h2>
-    <p>{homePage.featuredCharacter.description}</p>
-    <div>
-      {homePage.featuredCharacter.characters.map(characters => (
-            <characters slug={`champion/${characters.slug}`} key={characters.id} characters={characters} />
-          ))}
-    </div>
-  </div>
-</Layout>
+            return (
+              <Link to={`Champion/${characters.slug}`}>
+                <GatsbyImage
+                  image={profileImage}
+                  alt={characters.characterMeta.profilePicture.altText}
+                />
+                <div>
+                  <p>
+                    {characters.characterMeta.naam} {characters.characterMeta.alias}
+                  </p>
+                </div>
+              </Link>
+            )
+          })}
+        </div>
+      </div>
+    </Layout>
   )
 }
 
@@ -120,6 +107,7 @@ query  {
                 slug
               }
             }
+            slug
           }
         }
         description
