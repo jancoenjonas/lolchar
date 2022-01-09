@@ -75,7 +75,7 @@ const IndexPage = ({
 // Page Query
 export const query = graphql`
 query  {
-  wpPage {
+  wpPage(slug: {eq: "home"}) {
     homePage {
       headerHome {
         description

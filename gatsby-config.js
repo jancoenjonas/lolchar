@@ -12,7 +12,6 @@ module.exports = {
     {
       resolve: "gatsby-source-wordpress",
       options: {
-       
         url: "http://back-up-lol.local/graphql",
       },
     },

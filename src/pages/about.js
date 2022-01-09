@@ -8,7 +8,7 @@ const AboutPage = ({ data }) => {
   return (
     <Layout pageTitle="About Us">
       <p>
-      {" "}
+        ma namen is jef !
       </p>
     </Layout>
   )
@@ -17,33 +17,32 @@ const AboutPage = ({ data }) => {
 export default AboutPage
 
 export const query = graphql`
-query  {
-  wpPage(slug: {eq: "about-us"}) {
-    aboutPage {
-      headerAboutUs {
-        title
-        description
-        picture {
-          localFile {
-            childImageSharp {
-              gatsbyImageData(quality: 100)
+  query {
+    wpPage(slug: { eq: "about-us" }) {
+      aboutPage {
+        headerAboutUs {
+          title
+          description
+          picture {
+            localFile {
+              childImageSharp {
+                gatsbyImageData(quality: 100)
+              }
             }
           }
         }
-      }
-      mission {
-        title
-        description
-        bannerPicture {
-          localFile {
-            childImageSharp {
-              gatsbyImageData(quality: 10)
+        mission {
+          title
+          description
+          bannerPicture {
+            localFile {
+              childImageSharp {
+                gatsbyImageData(quality: 100)
+              }
             }
           }
         }
       }
     }
   }
-}
-
 `
