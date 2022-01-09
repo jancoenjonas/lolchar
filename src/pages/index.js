@@ -68,6 +68,15 @@ const IndexPage = ({
       })}
     </div>
   </div>
+  <div>
+    <h2>{homePage.featuredCharacter.title}</h2>
+    <p>{homePage.featuredCharacter.description}</p>
+    <div>
+      {homePage.featuredCharacter.characters.map(characters => (
+            <characters slug={`champion/${characters.slug}`} key={characters.id} characters={characters} />
+          ))}
+    </div>
+  </div>
 </Layout>
   )
 }
@@ -119,6 +128,5 @@ query  {
     }
   }
 }
-
 `
 export default IndexPage
