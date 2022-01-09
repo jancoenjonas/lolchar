@@ -12,7 +12,7 @@ module.exports = {
     {
       resolve: "gatsby-source-wordpress",
       options: {
-        url: "http://localhost/graphql",
+        url: "http://back-up-lol.local/graphql", // http://jancosambaer.gpro.apstudent.be
       },
     },
   ],
